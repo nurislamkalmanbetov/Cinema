@@ -63,7 +63,7 @@ class EmployeesAdmin(admin.ModelAdmin):
     list_filter = ('name', )     
 
 
-class Job_titleAdmin(admin.ModelAdmin):
+class JobTitleAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
     list_display_links = ('title',) # кликабельные столбцы, при клике будут доступны
     search_fields = ('title',)
@@ -79,4 +79,4 @@ admin.site.register(Price_for_tickets, Price_for_ticketsAdmin)
 admin.site.register(Tickets, TicketsAdmin)
 admin.site.register(Moving_tickets, Moving_ticketsAdmin)
 admin.site.register(Employees, EmployeesAdmin)
-admin.site.register(Job_title, Job_titleAdmin)
+admin.site.register(JobTitle, JobTitleAdmin)

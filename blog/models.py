@@ -49,6 +49,9 @@ class Sector_salon(models.Model):
         verbose_name_plural = 'Секторы зала'
         ordering = ['name']
 
+    def __str__(self):
+        return self.name
+
 
 class Seanses(models.Model):
     seanses = models.ForeignKey(Saloon, on_delete=models.CASCADE, verbose_name='Сеансы', related_name='seanses')
@@ -74,6 +77,10 @@ class Places(models.Model):
         verbose_name = 'Место'
         verbose_name_plural = 'Места'
         ordering = ['places']
+
+    def __str__(self):
+        return str(f'{self.places}')
+
 
 class Price_for_tickets(models.Model):
     price_for_ticket = models.ForeignKey(Seanses, on_delete=models.CASCADE, verbose_name='Стоимость билета', related_name='price_for_ticket')
@@ -107,24 +114,20 @@ class Tickets(models.Model):
         return str(self.ticket_number)
 
 
-class Moving_tickets(models.Model):
-    number_ticket = models.ForeignKey(Tickets, on_delete=models.CASCADE, verbose_name='Билет номер', related_name='number_ticket')
-    date = models.DateTimeField(verbose_name='Дата')
-    operation = models.CharField(max_length=50, verbose_name='Операции')
-    employee = models.ForeignKey('Employees', on_delete=models.CASCADE, verbose_name='Сотрудник', related_name='employee')
-
-    def __str__(self):
-        return f"{str(self.number_ticket)}, {str(self.employee)}"
+class JobTitle(models.Model):
+    title = models.CharField(max_length=250, verbose_name='Информация')
 
     class Meta:
-        verbose_name = 'Движение билета'
-        verbose_name_plural = 'Движение билетов'
-        ordering = ['number_ticket'] 
+        verbose_name = 'Должность'
+        verbose_name_plural = 'Должности'
+        ordering = ['title']
 
+    def __str__(self):
+        return str(self.title)
 
 class Employees(models.Model):
     name = models.CharField(max_length=75, verbose_name='ФИО')
-    title = models.ForeignKey('Job_title', on_delete=models.CASCADE, verbose_name='Описание', related_name='employees')
+    title = models.ForeignKey(JobTitle, on_delete=models.CASCADE, verbose_name='Описание', related_name='employees')
     password = models.CharField(max_length=50, verbose_name='Пароль')
 
     class Meta:
@@ -136,11 +139,17 @@ class Employees(models.Model):
         return str(self.name)
 
 
-class Job_title(models.Model):
-    title = models.CharField(max_length=250, verbose_name='Информация')
+class Moving_tickets(models.Model):
+    number_ticket = models.ForeignKey(Tickets, on_delete=models.CASCADE, verbose_name='Билет номер', related_name='number_ticket')
+    date = models.DateTimeField(verbose_name='Дата')
+    operation = models.CharField(max_length=50, verbose_name='Операции')
+    employee = models.ForeignKey(Employees, on_delete=models.CASCADE, verbose_name='Сотрудник', related_name='employee')
+
+    def __str__(self):
+        return f"{str(self.number_ticket)}, {str(self.employee)}"
 
     class Meta:
-        verbose_name = 'Должность'
-        verbose_name_plural = 'Должности'
-        ordering = ['title']
+        verbose_name = 'Движение билета'
+        verbose_name_plural = 'Движение билетов'
+        ordering = ['number_ticket'] 
 
