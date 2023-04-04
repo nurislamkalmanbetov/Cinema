@@ -5,7 +5,7 @@ from .models import *
 
 
 class CinemaAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'duration', 'rental_start_date', 'rental_finish_date', 'sales_company', 'date_pub', 'author')
+    list_display = ('id', 'name', 'duration', 'image', 'rental_start_date', 'rental_finish_date', 'sales_company', 'date_pub', 'author')
     list_display_links = ('id', 'name') # кликабельные столбцы, при клике будут доступны
     search_fields = ('name', 'title')
     list_filter = ('date_pub', )

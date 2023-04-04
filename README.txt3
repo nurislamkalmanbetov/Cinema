@@ -1,0 +1,7 @@
+1 startapp
+    settigs,models,admin,vies, urls
+2 serializers
+    config:
+        url, settings
+    app:
+        models, admin, serializer, views, urls

@@ -8,6 +8,7 @@ class Cinema(models.Model):
     name = models.CharField(max_length=50, verbose_name='Название')
     duration = models.CharField(max_length=25, verbose_name='Длительность')
     title = models.CharField(max_length=250, verbose_name='Описание')
+    image = models.ImageField(null=True, blank=True)  
     rental_start_date = models.DateTimeField(verbose_name='Дата начало проката')
     rental_finish_date = models.DateTimeField(verbose_name='Дата окончания проката') 
     sales_company = models.CharField(max_length=50, verbose_name='Название компании')
@@ -124,6 +125,7 @@ class JobTitle(models.Model):
 
     def __str__(self):
         return str(self.title)
+    
 
 class Employees(models.Model):
     name = models.CharField(max_length=75, verbose_name='ФИО')

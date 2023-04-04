@@ -1,6 +1,10 @@
 asgiref==3.6.0
 backports.zoneinfo==0.2.1
-Django==4.1.7
+Django==3.2
 django-environ==0.10.0
 psycopg2-binary==2.9.5
 sqlparse==0.4.3
+pillow-9.4.0
+djangorestframework==3.13
+drf-yasg2
+django-filter
