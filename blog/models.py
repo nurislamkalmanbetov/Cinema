@@ -38,7 +38,7 @@ class Saloon(models.Model):
 
     def __str__(self):
         return self.name
-
+    
 
 class Sector_salon(models.Model):
     sector_salon = models.ForeignKey(Saloon, on_delete=models.CASCADE, verbose_name='Секторы зала', related_name='sector_salon')
@@ -58,7 +58,7 @@ class Seanses(models.Model):
     seanses = models.ForeignKey(Saloon, on_delete=models.CASCADE, verbose_name='Сеансы', related_name='seanses')
     date = models.DateTimeField(verbose_name='Дата')
     time = models.TimeField(verbose_name='Время')
-    movie = models.ForeignKey(Cinema, on_delete=models.CASCADE, verbose_name='Фильм', related_name='seanses')
+    movie = models.ForeignKey(Cinema, on_delete=models.CASCADE, verbose_name='Фильм', related_name='movie_seanses')
 
     class Meta:
         verbose_name = 'Сеанс'

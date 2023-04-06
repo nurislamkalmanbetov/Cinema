@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from .models import  *
 
+# Cinema_________________________________________________________________________________________________
 
 class CinemaSerializers(serializers.ModelSerializer):
     class Meta:
@@ -9,10 +10,74 @@ class CinemaSerializers(serializers.ModelSerializer):
         fields = ('id', 'name', 'duration', 'title', 'image', 'rental_start_date', 'rental_finish_date', 'sales_company', 'date_pub', 'author', )
 
 
+class CinemaSessionSerializer(serializers.ModelSerializer):
+    seanses = serializers.StringRelatedField()
+
+    class Meta:
+        model = Seanses
+        fields = ['id', 'seanses', 'date', 'time']
+
+
+class CinemaDetailSerializer(serializers.ModelSerializer):
+    movie_seanses = CinemaSessionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Cinema
+        fields = ('id', 'name', 'duration', 'title', 'image', 'rental_start_date', 'rental_finish_date', 'sales_company', 'date_pub', 'author', 'movie_seanses')
+
+
+
+
+# seanses_________________________________________________________________________________________________
+
+class SeansesSerializers(serializers.ModelSerializer):
+    seanses = serializers.StringRelatedField()
+    movie = serializers.StringRelatedField()
+    class Meta:
+        model = Seanses
+        fields = ('id', 'seanses', 'date', 'time', 'movie', )
+
+
+    
+class SeansesCinemaSerializer(serializers.ModelSerializer):
+    # seanses = serializers.StringRelatedField()
+
+    class Meta:
+        model = Cinema
+        fields = ['id', 'name', 'title', 'sales_company', ]
+
+
+class SeansesDetailSerializer(serializers.ModelSerializer):
+    # movie_seanses = serializers.CharField(source = 'movie.name',)
+
+    class Meta:
+        model = Seanses
+        fields = ('seanses', 'date', 'time', 'movie', )
+
+
+# _________________________________________________________________________________________________
+# Sallon
+
 class SaloonSerializers(serializers.ModelSerializer):
     class Meta:
         model = Saloon
         fields = ('id', 'name', 'count_place', 'description', 'number_of_rows', 'number_of_places', )
+
+class SaloonCinemaSerializer(serializers.ModelSerializer):
+    # seanses = serializers.StringRelatedField()
+
+    class Meta:
+        model = Saloon
+        fields = ['id', 'name', 'count_place', 'description', 'number_of_rows', 'number_of_places', ]
+
+class SaloonDetailSerializer(serializers.ModelSerializer):
+    # movie_seanses = serializers.CharField(source = 'movie.name',)
+
+    class Meta:
+        model = Saloon
+        fields = ('name', 'count_place', 'description', 'number_of_rows', 'number_of_places', )
+
+# _________________________________________________________________________________________________
 
 
 class Sector_salonSerializers(serializers.ModelSerializer):

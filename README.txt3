@@ -1,7 +1,11 @@
 1 startapp
-    settigs,models,admin,vies, urls
+    settigs,models,admin,views, urls
 2 serializers
     config:
         url, settings
     app:
-        models, admin, serializer, views, urls
+        models, admin, 
+        serializer (+ detailSerializer), views 
+        serializer API's - 
+        ListAPIView, CreateAPIView, CinemaFilter(django_filters.FilterSet), RetrieveAPIView, DestroyAPIView
+        views -> serializer -> urls
