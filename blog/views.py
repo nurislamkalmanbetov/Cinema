@@ -2,14 +2,41 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
 
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, ListCreateAPIView
 from rest_framework import filters
 from .serializers import *
 import django_filters
 
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+
+
+
+# auth
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response 
+
+
+class AuthTokenView(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'email': user.email,
+            'name': user.first_name
+        })
+
+
+
 
 # _________________________________________________________________________________________________
 # Cinema - ListAPIView, CreateAPIView, Filter(django_filters.FilterSet), RetrieveAPIView, DestroyAPIView,
+
 
 class CinemaFilter(django_filters.FilterSet):
     start_year = django_filters.NumberFilter(field_name='rental_start_date__year') # + __year # + NumberFilter
@@ -23,7 +50,7 @@ class CinemaListAPIView(ListAPIView):
     filter_backends = {filters.SearchFilter, filters.OrderingFilter, django_filters.rest_framework.DjangoFilterBackend}
     # filterset_fields = ('sales_company', ) # то что нужно, фронтендер будет запрашивать и только это нужно
     search_fields = ('name', 'sales_company')
-    filterset_class = CinemaFilter
+    # filterset_class = CinemaFilter
 
     def get_queryset(self):
         queryset = Cinema.objects.all()
@@ -65,12 +92,15 @@ class SeansesFilter(django_filters.FilterSet):
         fields = ('date', )
 
 
-class SeansesListAPIView(ListAPIView):
+class SeansesListAPIView(ListCreateAPIView):
     serializer_class = SeansesSerializers
     queryset = Seanses.objects.all()
     filter_backends = {filters.SearchFilter, filters.OrderingFilter, django_filters.rest_framework.DjangoFilterBackend}
     filterset_class = SeansesFilter # то что нужно, фронтендер будет запрашивать и только это нужно
     search_fields = ('seanses', 'date', 'time', 'movie')
+
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     # def get_queryset(self):
     #     queryset = Seanses.objects.all()
@@ -210,58 +240,3 @@ class EmployeeCreateAPIView(CreateAPIView):
 #         result += f'{employee.name} {employee.title.title} <br><br>'
 #     return HttpResponse(result)
 
-# def get_saloon(request):
-#     saloons = Saloon.objects.all()
-#     result = ''
-#     for saloon in saloons:
-#         result += f'{saloon.name} {saloon.count_place} {saloon.description} {saloon.number_of_rows} {saloon.number_of_places} <br><br>'
-#     return HttpResponse(result)
-
-# def get_sector_saloon(request):
-#     sector_saloons = Sector_salon.objects.all()
-#     result = ''
-#     for sector_saloon in sector_saloons:
-#         result += f'{sector_saloon.sector_salon.name} {sector_saloon.name} {sector_saloon.name} {sector_saloon.description} <br><br>'
-#     return HttpResponse(result)   
-
-# def get_seanses(request):
-#     seanses = Seanses.objects.all()
-#     result = ''
-#     for seans in seanses:
-#         result += f'{seans.seanses.name} {seans.date} {seans.time} {seans.movie.name} <br><br>' 
-#     return HttpResponse(result) 
-
-# def get_places(request):
-#     places = Places.objects.all()
-#     result = ''
-#     for place in places:
-#         result += f'{place.places.name} {place.row_number} {place.row_place} <br><br>'
-#     return HttpResponse(result) 
-
-# def get_price_for_ticket(request):
-#     price_for_tickets = Price_for_tickets.objects.all()
-#     result = ''
-#     for price_for_ticket in price_for_tickets:
-#         result += f'{price_for_ticket.price_for_ticket.seanses} {price_for_ticket.sector.sector_salon.name} {price_for_ticket.price} <br><br>'
-#     return HttpResponse(result) 
-
-# def get_tickets(request):
-#     tickets = Tickets.objects.all()
-#     result = ''
-#     for ticket in tickets:
-#         result += f'{ticket.ticket_number} {ticket.date_created} {ticket.seans.seanses.name} {ticket.place.places.name} {ticket.payed} {ticket.booking} {ticket.crashed} <br><br>'
-#     return HttpResponse(result) 
-
-# def get_jobtitle(request):
-#     job_titles = JobTitle.objects.all()
-#     result = ''
-#     for job_title in job_titles:
-#         result += f'{job_title.title}  <br><br>'
-#     return HttpResponse(result) 
-
-# def get_moving_tickets(request):
-#     moving_tickets = Moving_tickets.objects.all()
-#     result = ''
-#     for moving_ticket in moving_tickets:
-#         result += f'{moving_ticket.number_ticket.ticket_number} {moving_ticket.date} {moving_ticket.operation} {moving_ticket.employee.name} <br><br>'
-#     return HttpResponse(result) 

@@ -9,3 +9,21 @@
         serializer API's - 
         ListAPIView, CreateAPIView, CinemaFilter(django_filters.FilterSet), RetrieveAPIView, DestroyAPIView
         views -> serializer -> urls
+3 Authentications 
+    settings:
+        REST_FRAMEWORK = (
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'rest_framework.authentication.BaseAuthentication',
+            'rest_framework.authentication.SessionAuthentication'
+            ]
+        )
+    -> views.   (from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+                from rest_framework.permissions import IsAuthenticated)
+    token ->    settings (installed apps;     'rest_framework.authtoken',)
+    -> signals. ()
+    -> urls     (from rest_framework.authtoken import views 
+                path('api-token-auth/', views.obtain_auth_token, name='api_token_auth'))
+    -> views    (from rest_framework.authtoken.views import ObtainAuthToken
+                from rest_framework.authtoken.models import Token
+                from rest_framework.response import Response 
+                )

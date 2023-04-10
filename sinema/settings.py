@@ -31,6 +31,8 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
+# AUTH_USER_MODEL = # 
+
 
 # Application definition
 
@@ -43,8 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #зависимости сначала
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_yasg2',
-
     #myapps
     'blog.apps.BlogConfig',
 ]
@@ -143,3 +145,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+    ]
+}

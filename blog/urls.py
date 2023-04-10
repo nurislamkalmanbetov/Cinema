@@ -1,9 +1,13 @@
 from django.urls import path
 from .views import *
+from rest_framework.authtoken import views
 
 
 urlpatterns = [
-    path('cinema/', CinemaListAPIView.as_view()),
+    # authtokem
+    path('api-token-auth/', AuthTokenView.as_view(), name='api_token_auth'),
+
+    path('cinema/', CinemaListAPIView.as_view(), name='cinema'),
     path('cinema/post', CinemaCreateAPIView.as_view()),
     path('cinema/<int:pk>/', CinemaRetriveAPIView.as_view(), name='cinema_retrieve'),
     path('cinema/delete/<int:pk>/', CinemaDestroyAPIView.as_view(), name='cinema_delete'),
@@ -25,6 +29,8 @@ urlpatterns = [
     path('jobtitle/', JobtitleListAPIView.as_view()),
     path('employees/', EmployeesListAPIView.as_view()),
     path('employees/create/', EmployeeCreateAPIView.as_view()),
+
+    # path('getmovie/', get_movies, name='getmovie'),
 ]
 
 

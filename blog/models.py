@@ -40,6 +40,7 @@ class Saloon(models.Model):
         return self.name
     
 
+
 class Sector_salon(models.Model):
     sector_salon = models.ForeignKey(Saloon, on_delete=models.CASCADE, verbose_name='Секторы зала', related_name='sector_salon')
     name = models.CharField(max_length=50, verbose_name='Секторы зала')
