@@ -2,6 +2,19 @@ from rest_framework import serializers
 
 from .models import  *
 
+# Users 
+
+class UserRegistrationSerializers(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+    password2 = serializers.CharField()
+
+    def validate(self, data):
+        if data['password'] != data['password2']:
+            raise serializers.ValidationError('Пароли не совпадают')
+        return data
+
+
 # Cinema_________________________________________________________________________________________________
 
 class CinemaSerializers(serializers.ModelSerializer):
@@ -93,6 +106,7 @@ class JobTitleSerializers(serializers.ModelSerializer):
 
 
 class EmployeesSerializers(serializers.ModelSerializer):
+
     title = serializers.CharField(source='title.title')  # связи между собой Foreignkey пишем это
 
     class Meta:
@@ -104,3 +118,13 @@ class EmployeesSerializers(serializers.ModelSerializer):
         job = JobTitle.objects.get(title=title_name)
         employee = Employees.objects.create(title=job, **validatet_data)
         return employee
+    
+
+# _________________________________________________________________________________________________
+# Moving Ticket 
+
+class MovingTicketsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Moving_tickets
+        fields = ('id', 'number_ticket', 'date', 'operation', 'employee', )
+        read_only_fields = ('id', 'created_at',)

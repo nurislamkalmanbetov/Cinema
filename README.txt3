@@ -11,12 +11,11 @@
         views -> serializer -> urls
 3 Authentications 
     settings:
-        REST_FRAMEWORK = (
+            REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': [
-            'rest_framework.authentication.BaseAuthentication',
-            'rest_framework.authentication.SessionAuthentication'
-            ]
-        )
+            'rest_framework.authentication.TokenAuthentication',
+            ],
+        }
     -> views.   (from rest_framework.authentication import SessionAuthentication, BasicAuthentication
                 from rest_framework.permissions import IsAuthenticated)
     token ->    settings (installed apps;     'rest_framework.authtoken',)
@@ -27,3 +26,25 @@
                 from rest_framework.authtoken.models import Token
                 from rest_framework.response import Response 
                 )
+                #auth
+                from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+                from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+
+                # auth
+                from rest_framework.authtoken.views import ObtainAuthToken
+                from rest_framework.authtoken.models import Token
+                from rest_framework.response import Response 
+
+                #user
+                from django.contrib.auth.models import User
+                -> serialier - # Users $ Auth 
+    -> permission.py -> 
+    -> settings.py REST_FRAMEWORK = {
+                    'DEFAULT_AUTHENTICATION_CLASSES': [
+                        'rest_framework.authentication.TokenAuthentication',
+                    ],
+                    'DEFAULT_PERMISSION_CLASSES': [
+                        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+                    ],
+                    }
+                    -> new views for MovingTicket  -> [DjangoModelPermissionsOrAnonReadOnly] - будут иметь доступ

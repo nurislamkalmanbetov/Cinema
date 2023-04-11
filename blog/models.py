@@ -147,6 +147,7 @@ class Moving_tickets(models.Model):
     date = models.DateTimeField(verbose_name='Дата')
     operation = models.CharField(max_length=50, verbose_name='Операции')
     employee = models.ForeignKey(Employees, on_delete=models.CASCADE, verbose_name='Сотрудник', related_name='employee')
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Продавец', related_name='seller')
 
     def __str__(self):
         return f"{str(self.number_ticket)}, {str(self.employee)}"

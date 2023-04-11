@@ -6,24 +6,30 @@ from rest_framework.authtoken import views
 urlpatterns = [
     # authtokem
     path('api-token-auth/', AuthTokenView.as_view(), name='api_token_auth'),
-
+    #user
+    path('registration/', RegistrationView.as_view(), name='registration'),
+    # Cinema
     path('cinema/', CinemaListAPIView.as_view(), name='cinema'),
     path('cinema/post', CinemaCreateAPIView.as_view()),
     path('cinema/<int:pk>/', CinemaRetriveAPIView.as_view(), name='cinema_retrieve'),
     path('cinema/delete/<int:pk>/', CinemaDestroyAPIView.as_view(), name='cinema_delete'),
     path('cinema/update<int:pk>/', CinemaUpdateAPIView.as_view(), name='cinema_update'),
-    
+    # Sinema
     path('seanses/', SeansesListAPIView.as_view()),
     path('seanses/post', SeansesCreateAPIView.as_view()),
     path('seanses/<int:pk>/', SeansesRetriveAPIView.as_view(), name='seanses_retrieve'),
     path('seanses/delete/<int:pk>/', SeansesDestroyAPIView.as_view(), name='seanses_delete'),
     path('seanses/update/<int:pk>/', SeansesUpdateAPIView.as_view(), name='seanses_update'),
-
+    # Saloon
     path('saloon/', SaloonListAPIView.as_view()),
     path('saloon/post', SaloonCreateAPIView.as_view()),
     path('saloon/<int:pk>/', SaloonRetriveAPIView.as_view(), name='saloon_retrieve'),
     path('saloon/delete/<int:pk>/', SaloonDestroyAPIView.as_view(), name='saloon_delete'),
     path('saloon/update/<int:pk>/', SaloonUpdateAPIView.as_view(), name='saloon_update'),
+    # Moving tickets
+    path('moving_tickets/', MovingTicketsListCreateAPIView.as_view(), name='moving_tickets_list_create'),
+    path('moving_tickets/<int:pk>/', MovingTicketsRetrieveUpdateDestroyAPIView.as_view(), name='moving_tickets_retrieve_update_destroy'),
+ 
 
     path('sectorsalon/', Sector_salonListAPIView.as_view()),
     path('jobtitle/', JobtitleListAPIView.as_view()),
