@@ -1,6 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
+# templates
+from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView
+from django.urls import reverse
+from .forms import *
+
+
 
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework import generics, filters, status
@@ -41,7 +50,6 @@ class RegistrationView(CreateAPIView):
 
 #_______________________________________________________________________________________________
 
-
 class AuthTokenView(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data, context={'request': request})
@@ -54,8 +62,6 @@ class AuthTokenView(ObtainAuthToken):
             'email': user.email,
             'name': user.first_name
         })
-
-
 
 
 # _________________________________________________________________________________________________
@@ -274,7 +280,6 @@ class MovingTicketsListCreateAPIView(ListCreateAPIView):
 
 
 
-
 class MovingTicketsRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = MovingTicketsSerializer
     queryset = Moving_tickets.objects.all()
@@ -287,34 +292,47 @@ class MovingTicketsRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
         else:
             return Response(status=status.HTTP_403_FORBIDDEN, data={'message': 'You are not the owner this record'})
 
+# TemplateView_______________________________________________________________________________________
+
+class CinemaTemplateView(ListView):
+    template_name = 'cinema/cinema.html'
+    model = Cinema
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cinemas'] = self.model.objects.all() # sinemas - должен быть, потому что в темплейтс не будет рендериться
+        return context
+    
+
+class CinemaDetailView(DetailView):
+    template_name = 'cinema/cinema_detail.html'
+    model = Cinema
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cinema'] = self.model.objects.get(pk=self.kwargs['pk'])
+        return context
+
+
+class CinemaCreateView(CreateView):
+    template_name = 'cinema/cinema_create.html'
+    form_class = CinemaForm
+    success_url = '/cinema_detail/'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+    
+    # redirect to movie_detail
+    def get_success_url(self):
+        return reverse('cinema_detail', kwargs={'pk': self.object.pk})
+    
+
+class CinemaUpdateView(UpdateView):
+    model = Cinema
+    template_name = 'cinema/cinema_update.html'
 
 
 
 
-
-
-
-
-
-
-
-
-# Create your views here.
-
-# def index(request):
-#     return HttpResponse("Привет! Моя первая страница")
-
-# def get_movies(request):
-#     cinemas = Cinema.objects.all() 
-#     result = ''
-#     for cinema in cinemas:
-#         result += f'{cinema.image} {cinema.name} {cinema.duration} {cinema.rental_start_date} <br><br>'
-#     return HttpResponse(result)
-
-# def get_employee(request):
-#     employees = Employees.objects.all()
-#     result = ''
-#     for employee in employees:
-#         result += f'{employee.name} {employee.title.title} <br><br>'
-#     return HttpResponse(result)
 

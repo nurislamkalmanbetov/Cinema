@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+<h1>Sinema "Cosmopark"</h1>
+
+{% block content %}
+    <h1>My First Template</h1>
+    <p>Cuttent time:</p>
+    {% for cinema in cinemas %}
+        <p>{{ cinema.id }}</p>
+        <p>{{ cinema.name }}</p>
+        <p>{{ cinema.duration }}</p>
+        <p>{{ cinema.sales_company }}</p>
+        <p>{{ cinema.image }}</p>
+        <p>{{ cinema.title }}</p>
+        <br>
+        <br>
+        <br>
+    {% endfor %}    
+{% endblock %}

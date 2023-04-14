@@ -35,6 +35,11 @@ urlpatterns = [
     path('jobtitle/', JobtitleListAPIView.as_view()),
     path('employees/', EmployeesListAPIView.as_view()),
     path('employees/create/', EmployeeCreateAPIView.as_view()),
+    #TemplateView
+    path('cinema_template/', CinemaTemplateView.as_view(), name='cinema_template'),
+    path('cinema_detail/<int:pk>/', CinemaDetailView.as_view(), name='cinema_detail'),
+    path('cinema_create/', CinemaCreateView.as_view(), name='cinema_create'),
+    # path('', TemplateView.as_view(template_name='base.html'), name='base')
 
     # path('getmovie/', get_movies, name='getmovie'),
 ]

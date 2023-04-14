@@ -21,7 +21,7 @@
     token ->    settings (installed apps;     'rest_framework.authtoken',)
     -> signals. ()
     -> urls     (from rest_framework.authtoken import views 
-                path('api-token-auth/', views.obtain_auth_token, name='api_token_auth'))
+                path('api-token-auth/', views.obtain_auth_token -> [signals.py], name='api_token_auth'))
     -> views    (from rest_framework.authtoken.views import ObtainAuthToken
                 from rest_framework.authtoken.models import Token
                 from rest_framework.response import Response 
@@ -48,3 +48,17 @@
                     ],
                     }
                     -> new views for MovingTicket  -> [DjangoModelPermissionsOrAnonReadOnly] - будут иметь доступ
+    -> views [GET- POST] 
+            import APIVIE, response
+            -> job_list -> jobserializer -> urls -> views - viewsset (class RoomViewSet) - url (include, router)
+            -> from rest-frame.viewset impor t Modelviewset
+
+            google authoritation -> https://console.cloud.google.com/apis/credentials - social_network 
+            https://www.youtube.com/watch?v=XEHzrXlQAY8&list=PLF-NY6ldwAWosy6hAyKMwZozmEyq1J2fg&index=4
+
+    -> templates - open directory templates -> settings ['tempalates'] - (settings)STATIC_ROOT = 'static/'
+            view - TemplateView - urls - settings STATIC_URL = 'static/'
+                                                    STATICFILES_DIRS = [
+                                                        BASE_DIR / 'static',
+                                                    ]
+            -> forms.py (cinema) ->
