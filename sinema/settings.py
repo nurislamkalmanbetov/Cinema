@@ -154,3 +154,20 @@ REST_FRAMEWORK = {
     ],
 
 }
+
+# GMAIL_USER = env('LOGIN GMAIL')
+# GMAIL_PASSWORD = env('PASSWORD GMAIL')
+
+CELERY_BROKER_URL = 'amqp://localhost'
+
+GOOGLE_KEY = BASE_DIR / 'blog/googlemail.json'
+GOOGLE_TOKEN = BASE_DIR / 'blog/token.json'
+
+
+
+
+
+
+
+
+

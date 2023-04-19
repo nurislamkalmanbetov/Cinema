@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "winter-footing-368514",
+  "private_key_id": "e89286c0dc307002ec114fc746f8e03c978754e8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC4yo9qNYHWBFlF\neaLcswDS0ArbLWPxcvXZwcoszTJpDgTflsQtZWpgWyN5OxOsU77QjIBkGlKeANcR\n2lu0JT9YXzYasPevCerIEvwIhXdvB9pD44mOYLSLe8Znjp5fbpO9mh5TuyJsVNAq\nMi9q0zfUkQjpKJJXbTf0GTs1p6npFNNVT/d+MxToH3hFUHI0eEzEn49gCUS6HY2C\n1KrGlYBS8blBS7VWnXianaOlWXydxW1NpQR/JRHTuND0pJgNatCviwRxTQBffZRy\n/IWs9mm1p0BKL4fza9MoBb0AOcZvXCTGFbPtPsjK25FrEBfaMzAJ8876z1yquq2f\n1YCaQKFZAgMBAAECggEAK9RNkk8pIbIr21znmkmxvQ6/uG8qaJsQAWtjsN8loQHE\neaTImIzYn4yWXBt9Rc8iL9RXYobUyCmiWVdtj0uTW/pPOqL1SFTFlVldYocHhjP6\nWsZV+slooTnFHAxZd4CidaLfpRP6bO/r5Mo88W0yLY6N6sFm/moHDrRKVSZUmFXj\nFppa7nV5N/TI/SvEK/GBA14OR3DVzamCl+VFhqo6ezS7hoKU3vtRXqmk3RedaIET\nm6oRJLLwzvYTpoI1o/4ZioEuoNh+KQozqzOfPQpv2L/MY99hi6GgHHAtJ4TpS622\n0HWnFD6FMWVkxFVe90gVvXQI3xuE3+0akEDyXpyQ9QKBgQDmVm4SnjvRgvic6cRr\nlTojPBY4xBtssnNx6HZkxeTk2Qao10uyMrwYrpXuHKjcBbTSoCTGrUnP/46rxYFW\nKStQiYDvjVYmLXMrLHUgmhvJFyRcGdE9m4oDGlupIGY7pOsFLdXFZ6wocdffHy0M\nRozY+7Oq5HaUiqwM9HZj7A+cvQKBgQDNYRSV3P2a5YyN9jRG46kt4y5sGv+uFUma\nVIup4oGLX+jzx0zH52HQzTZJll4u1ObqODaZUVi7J3rJ3ZjrIyCVWMPCqwD8Hw3W\nZbZlAD/PtrKqfJECJYh/KQCiNrEL6UjFJLxleth6HbUucOQGOdScE7v+5c9dH0eC\nCxgN1BV2zQKBgQCxOJ7IRGbR9GtEj7hI7jAlG/4c/wX6w/J/GdS+BGTwjurIzZ24\nJcEDXJCO/A4P+3P8+qpREtNP7djf4L56hIKHHMTPi3dVOHL8LOCRjQED34JiOpr7\nQ8kUShtsLTl7epA5E+L+V53mIHFvgpUudLm52S+LtOxnrapi7VSJ3P7GIQKBgQCf\nVmsfHbWPn/ndBZ9nRCc0F6YjbwrgZ1mUJ3W3lqiEliNoRj5WdTgZQ6yTiNqHINwJ\n6RTK/CaIBMgppweFndogpB40gHEiKYGVzZGlaH0ZTJfu1ve1n6L3bLs2HpJbOGEh\nui+D17vtefDgF+uAvQsrD9BxoJ+xkpvq02qVB+6jHQKBgC5PNrXnjAqdJiAI3O25\nN8sX2wHxpUQOhR11vSp0hGvC2vNbS8+rCrtohYN1knXsPDbahn+13DjYx6ioZE6z\n0cuB8JPVJ2MWAnqrNhOBSx5+1WUdQSqKV5OWFxg182QTk12c4sngBs5vSI5knlLl\nb1/Gjdh0iKknFqtzanTyVCbQ\n-----END PRIVATE KEY-----\n",
+  "client_email": "django-cinema@winter-footing-368514.iam.gserviceaccount.com",
+  "client_id": "103083773923208257266",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/django-cinema%40winter-footing-368514.iam.gserviceaccount.com"
+}

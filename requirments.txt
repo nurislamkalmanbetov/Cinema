@@ -8,3 +8,5 @@ pillow-9.4.0
 djangorestframework==3.13
 drf-yasg2
 django-filter
+pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+pip install celery 

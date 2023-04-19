@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import *
-from rest_framework.authtoken import views
+from rest_framework.authtoken import views 
 
 
 urlpatterns = [
@@ -39,8 +39,11 @@ urlpatterns = [
     path('cinema_template/', CinemaTemplateView.as_view(), name='cinema_template'),
     path('cinema_detail/<int:pk>/', CinemaDetailView.as_view(), name='cinema_detail'),
     path('cinema_create/', CinemaCreateView.as_view(), name='cinema_create'),
-    # path('', TemplateView.as_view(template_name='base.html'), name='base')
+    #Celery
+    path('users_list/', GenerateRandomUserView.as_view(), name='users_list'),
 
+
+    # path('', TemplateView.as_view(template_name='base.html'), name='base')
     # path('getmovie/', get_movies, name='getmovie'),
 ]
 

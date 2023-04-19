@@ -8,10 +8,12 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse
 from .forms import *
-
-
-
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+#Celery 
+from django.views.generic.edit import FormView
+from django.contrib import messages
+from django.shortcuts import redirect
+
 from rest_framework import generics, filters, status
 from .serializers import *
 import django_filters
@@ -27,10 +29,28 @@ from rest_framework.response import Response
 
 #user
 from django.contrib.auth.models import User
-
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 
 
+# Celery
+from .forms import GenerateRandomUserForm
+from .tasks import create_random_user_accounts
+
+
+
+class GenerateRandomUserView(FormView):
+    template_name = 'cinema/generate_random_users.html'
+    form_class = GenerateRandomUserForm
+
+    def form_valid(self, form):
+        total = form.cleaned_data.get('total')
+        create_random_user_accounts(total)
+        messages.success(self.request, 'We are generating your random users! Wait a moment and refresh this page.')
+        return redirect('users_list')
+    
+
+
+# ___
 
 
 class RegistrationView(CreateAPIView):

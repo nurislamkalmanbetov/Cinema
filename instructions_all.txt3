@@ -62,3 +62,53 @@
                                                         BASE_DIR / 'static',
                                                     ]
             -> forms.py (cinema) ->
+4 -> Celery!  - Подтверждение Gmail
+-> Imap google settings -> On your computer, open Gmail. -> google accout -> settings - >
+ -> Пересылка и POP/IMAP -> 	Включить IMAP (в день можем только отправлять по 99 сообщении) 
+  -> send_mail.py -> env (login, password) -> settings (GMAIL_USER, GMAIL_PASSWORD) ->
+   -> https://console.cloud.google.com/iam-admin/serviceaccounts/details/103083773923208257266;edit=true?project=winter-footing-368514
+    (даем доступ почте и создаем сервисную почту) 
+
+            flow = InstalledAppFlow.from_client_secrets_file(
+            '../googlemail.json', SCOPES) # тут обязательно ../google и тд
+    
+    pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+    https://console.cloud.google.com/ 
+            1. Создаем АПИ 'new project', даем имена доступ почту, после OAuth client id - даем доступ Тест юзер
+            2. Даем доступ 
+
+    Celery - pip install celery
+    https://www.rabbitmq.com/install-debian.html - install all code's - если установлено раннее, то не нужно все устанавливать
+    https://simpleisbetterthancomplex.com/tutorial/2017/08/20/how-to-use-celery-with-django.html#installing-rabbitmq-on-ubuntu-1604
+    in settings - celery.py - код внутри прописываем и название проекта -
+    blog - tasks.py - forms - html - views - url - 
+     -> в сеттингах нужно будет убрать 
+        # GMAIL_USER = env('LOGIN GMAIL')
+        # GMAIL_PASSWORD = env('PASSWORD GMAIL') 
+    -> дальше прописываешь во втором терминале, включив вирт.окруж celery -A mysite worker -l info 
+    пишешь 
+
+    Отправка Google сообщении через Селери - settings.   GOOGLE_KEY = BASE_DIR / 'blog/googlemail.json'
+                                                        GOOGLE_TOKEN = BASE_DIR / 'blog/token.json'
+            потом в from django.conf import settings - и вставляет где token - settings.GOOGLE_TOKEN
+                                                                google key - settings.GOOGLE_KEY 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
