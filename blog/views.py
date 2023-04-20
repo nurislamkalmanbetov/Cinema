@@ -13,20 +13,16 @@ from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView,
 from django.views.generic.edit import FormView
 from django.contrib import messages
 from django.shortcuts import redirect
-
 from rest_framework import generics, filters, status
 from .serializers import *
 import django_filters
-
 #auth
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-
 # auth
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response 
-
 #user
 from django.contrib.auth.models import User
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly

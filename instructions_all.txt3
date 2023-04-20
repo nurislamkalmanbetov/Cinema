@@ -1,5 +1,8 @@
+Instructions:
+
 1 startapp
     settigs,models,admin,views, urls
+
 2 serializers
     config:
         url, settings
@@ -9,6 +12,7 @@
         serializer API's - 
         ListAPIView, CreateAPIView, CinemaFilter(django_filters.FilterSet), RetrieveAPIView, DestroyAPIView
         views -> serializer -> urls
+
 3 Authentications 
     settings:
             REST_FRAMEWORK = {
@@ -62,6 +66,8 @@
                                                         BASE_DIR / 'static',
                                                     ]
             -> forms.py (cinema) ->
+
+
 4 -> Celery!  - Подтверждение Gmail
 -> Imap google settings -> On your computer, open Gmail. -> google accout -> settings - >
  -> Пересылка и POP/IMAP -> 	Включить IMAP (в день можем только отправлять по 99 сообщении) 
@@ -80,6 +86,7 @@
     Celery - pip install celery
     https://www.rabbitmq.com/install-debian.html - install all code's - если установлено раннее, то не нужно все устанавливать
     https://simpleisbetterthancomplex.com/tutorial/2017/08/20/how-to-use-celery-with-django.html#installing-rabbitmq-on-ubuntu-1604
+    
     in settings - celery.py - код внутри прописываем и название проекта -
     blog - tasks.py - forms - html - views - url - 
      -> в сеттингах нужно будет убрать 
@@ -92,10 +99,16 @@
                                                         GOOGLE_TOKEN = BASE_DIR / 'blog/token.json'
             потом в from django.conf import settings - и вставляет где token - settings.GOOGLE_TOKEN
                                                                 google key - settings.GOOGLE_KEY 
-
-
-
-
+    Проверка перед запуском - Rabbitmq статуса - sudo apt systemctl status rabbitmq
+                     celery - A mysite worker -l info 
+            через питон шел, запускаем код отдельно селери - from blog.create_random_user_accounts import create_random_user_accounts 
+                                                create_random_user_accounts.apply_async((20, )) - создали юзеров,
+                                                                                            через шел отдельно функцию
+        
+        -> celery (celery beat) -> celery.py: celery -A sinema worker -l info
+                                    (и запускаете в отдельном терминале селери) ->
+        next -> celery -A  sinema(your project)  beat (в другом терминале) 
+        
 
 
 
