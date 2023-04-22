@@ -1,0 +1,16 @@
+[tool.black]
+line-length = 80
+
+exclude = """
+\.git/
+pycache/
+migrations/
+.env
+.env.example
+.gitignore
+static/
+media/
+templates/
+"""
+
+

@@ -1,7 +1,8 @@
 import os
 from celery import Celery
 from celery.schedules import crontab
-import blog 
+import blog
+
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sinema.settings')
 
@@ -14,7 +15,7 @@ app.conf.timezone = 'Asia/Bishkek'
 app.conf.beat_schedule = {
     'add-every-5-seconds': {
         'task': 'blog.tasks.send_mail_task',
-        'schedule': crontab(minute='*/1'), # crontab(0, 0, day_of_month='22')
+        'schedule': crontab(0, 0, month_of_year='*/3'), # crontab(0, 0, day_of_month='22')
         'args': ()
     },
 }

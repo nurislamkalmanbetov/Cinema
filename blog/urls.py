@@ -29,8 +29,7 @@ urlpatterns = [
     # Moving tickets
     path('moving_tickets/', MovingTicketsListCreateAPIView.as_view(), name='moving_tickets_list_create'),
     path('moving_tickets/<int:pk>/', MovingTicketsRetrieveUpdateDestroyAPIView.as_view(), name='moving_tickets_retrieve_update_destroy'),
- 
-
+    # _
     path('sectorsalon/', Sector_salonListAPIView.as_view()),
     path('jobtitle/', JobtitleListAPIView.as_view()),
     path('employees/', EmployeesListAPIView.as_view()),
@@ -41,11 +40,11 @@ urlpatterns = [
     path('cinema_create/', CinemaCreateView.as_view(), name='cinema_create'),
     #Celery
     path('users_list/', GenerateRandomUserView.as_view(), name='users_list'),
-
+]
 
     # path('', TemplateView.as_view(template_name='base.html'), name='base')
     # path('getmovie/', get_movies, name='getmovie'),
-]
+
 
 
 # urlpatterns = [

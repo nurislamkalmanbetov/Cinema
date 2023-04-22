@@ -98,18 +98,30 @@ Instructions:
     Отправка Google сообщении через Селери - settings.   GOOGLE_KEY = BASE_DIR / 'blog/googlemail.json'
                                                         GOOGLE_TOKEN = BASE_DIR / 'blog/token.json'
             потом в from django.conf import settings - и вставляет где token - settings.GOOGLE_TOKEN
-                                                                google key - settings.GOOGLE_KEY 
-    Проверка перед запуском - Rabbitmq статуса - sudo apt systemctl status rabbitmq
+                                                                google key - settings.GOOGLE_KEY
+    + Crontab - package from Celery in celery.py also +
+    pip install python-crontab
+
+    Проверка перед запуском - Rabbitmq статуса - sudo systemctl status rabbitmq-server
                      celery - A mysite worker -l info 
-            через питон шел, запускаем код отдельно селери - from blog.create_random_user_accounts import create_random_user_accounts 
-                                                create_random_user_accounts.apply_async((20, )) - создали юзеров,
-                                                                                            через шел отдельно функцию
+    через питон шел, запускаем код отдельно селери -
+                            - from blog.create_random_user_accounts import create_random_user_accounts
+                              create_random_user_accounts.apply_async((20, )) - создали юзеров,
+                                                                                через шел отдельно функцию
         
         -> celery (celery beat) -> celery.py: celery -A sinema worker -l info
                                     (и запускаете в отдельном терминале селери) ->
-        next -> celery -A  sinema(your project)  beat (в другом терминале) 
+                                        next -> celery -A  sinema(your project)  beat (в другом терминале)
         
 
+5. flake8   - чтобы видеть ошибки
+    на уровне manage.py - создаем flake8 - запуск в старапп 'flake8 movie/views.py'
+    pip install flake8
+
+            - Чтобы убрать ошибки
+    black - touch .black  - прописываем -   [tool.black]
+                                                    line-length = 80
+    потом прописываем 
 
 
 
