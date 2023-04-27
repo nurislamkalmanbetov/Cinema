@@ -1,0 +1,23 @@
+        Instructions DOcker + postresql
+1. settings.py - ALLOWED_HOSTS=[] + .env
+2. install django-cors-headers==3.14.0 -> installed apps -> MIDDLEWARE -> #Cors
+                                                    'corsheaders.middleware.CorsMiddleware',
+                                                    в самом внизу
+                                                    CORS_ALLOW_ALL_ORIGINS = False
+                                                    if DEBUG:
+                                                        CORS_ALLOW_ALL_ORIGINS = True
+                                                    CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST') + .env
+3. Dockerfile - докеркомпос
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-ru
+ 3.1 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+ 3.2 sudo chmod +x /usr/local/bin/docker-compose
+ 3.3 docker-compose --version
+4. Newfile - docker-compose.yaml
+5. - прописываем - sudo docker-compose build - сначала
+                    sudo docker ps -a - проверка
+                    sudo docker-compose up - потом - собирает
+6. Запускаем первый терминал докер компос
+7. Открываем второй терминал и пишем -sudo docker ps -> sudo exec -it {key bash} ->
+pytho3 manage.py createsuperuser
+# sudo docker ps, sudo docker exec -it {key} bash
+

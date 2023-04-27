@@ -123,17 +123,70 @@ Instructions:
                                                     line-length = 80
     потом прописываем 
 
+6.  Проверка rabbitmq - sudo systemctl status rabbitmq-server
+    pip установить django-celery-beat
+    instaled apps -     'django_celery_beat',
+        в первом терминале запускаем селери - celery - A sinema worker -l info 
+        во втором терминале, запускаем - celery -A sinema beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    потом можем отправлять задачи через админ панель - sending tasks from admin panel with celery bead 
+    
+    flower
+    Проверка rabbitmq - sudo systemctl status rabbitmq-server
+    pip install flower
+    1) пишем в первом терминале - celery -A sinema worker -l info 
+    2) во втором - celery -A sinema beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    3) в третьем запуск - celery flower --port=5566 и переход будет так - http://localhost:5566/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+7. Docker - info - whttps://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-ru
+        7.1  sudo apt update
+        7.2  sudo apt install apt-transport-https ca-certificates curl software-properties-common
+        7.3  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        7.4  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+        7.5  sudo apt update
+        7.6  apt-cache policy docker-ce
+        7.7  sudo apt install docker-ce
+        7.8  sudo systemctl status docker
+                Всегда использовать "Sudo"!!!
+        7.9  sudo docker run hello-world
+        7.11 sudo docker ps
+        7.12 sudo docker ps -a   (все проекты)
+                Дополнительные коды
+                sudo docker stop {key} /  sudo docker restart {key}
+                sudo docker start {key} - проверка - sudo docker ps (если ничего нет, не запустился)
+                sudo docker rm {key}
+        7.13 Dockerfile - на уровне manage.py 
+        7.14 requirements.txt - update - pip freeze and delete backports.zoneinfo==0.2.1
+        7.15 settings.py - изменяем - 
+         DATABASES = {
+                'default': {
+                    'ENGINE': 'django.db.backends.sqlite3',
+                    'NAME': BASE_DIR / 'db.sqlite3',
+                }
+                # 'default': {
+                #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                #     'NAME': env('DB'),
+                #     'USER': env('DB_USER'),
+                #     'PASSWORD': env('DB_PASSWORD'),
+                #     'HOST': env('DB_HOST'),
+                #     'PORT': env('DB_PORT')
+                # }
+            }
+        7.16  python3 manage.py migrate 
+        7.17  python3 manage.py createsuperuser
+        7.17  sudo docker build -t getting-started .
+        7.17  sudo docker run -dp 8000:8000 getting-started
+        7.17  sudo docker ps (проверка и проходим дальше на сайт http://127.0.0.1:8000)
+        7.18  добавляем в докерфайл селери запуски 
+                    sudo docker run -dp (пишем хост например 8001:8001) getting-started - для фловер
+                    sudo docker ps - проверяем работает ли
+                    и переходим по хосту 8001
+                    другие тоже самое
+        7.20  Или же все CMD - прописываем одним махом после 
+        7.21  sudo docker run -dp 8001:8000 getting-started - даем новый порт 8001 и ждем. 
+                                                        если сайт не отображает, пишем: 
+                                                                        это айди ниже
+                                                        sudo docker logs (айди контейнера) -f
+        7.22  Проверка активности докера - sudo systemctl status docker
+                                            
+                                    

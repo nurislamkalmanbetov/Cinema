@@ -60,7 +60,7 @@ class GenerateRandomUserView(FormView):
         return redirect("users_list")
 
 
-# ___
+# ______________________________________________________________________________________________
 
 
 class RegistrationView(CreateAPIView):

@@ -38,12 +38,3 @@ def send_mail_task():
     return 'Отчет просрочкуи для админа!'
 
 
-# @shared_task
-# def send_mail_task():
-#     users = User.objects.filter(is_admin=True)
-#     for user in users:
-#         send_to_users(user.email, 'Отчет за неделю', f'{user.first_name} ты забыл отправить отчет {timezone.now()}')
-#     return 'Отчет просрочкуи для админа!'
-
-
-

@@ -29,7 +29,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 # AUTH_USER_MODEL = # 
 
@@ -43,17 +43,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #installed lirbary for docker psql
+    'corsheaders',
     #зависимости сначала
     'rest_framework',
     'rest_framework.authtoken',
     'drf_yasg2',
     #myapps
     'blog.apps.BlogConfig',
+    #installed
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    #Cors
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -88,11 +94,11 @@ WSGI_APPLICATION = 'sinema.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('DB'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT')
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT'),
     }
 }
 
@@ -158,16 +164,18 @@ REST_FRAMEWORK = {
 # GMAIL_USER = env('LOGIN GMAIL')
 # GMAIL_PASSWORD = env('PASSWORD GMAIL')
 
-CELERY_BROKER_URL = 'amqp://localhost'
+# CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_BROKER_URL = 'amqp://localhost/'
 
 GOOGLE_KEY = BASE_DIR / 'blog/googlemail.json'
 GOOGLE_TOKEN = BASE_DIR / 'blog/token.json'
 
 
+CORS_ALLOW_ALL_ORIGINS = False 
 
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
 
-
-
-
+CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST')
 
 
